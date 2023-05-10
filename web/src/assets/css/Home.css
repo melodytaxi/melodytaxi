@@ -1,0 +1,259 @@
+/* Overall container styles */
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+/* Navigation bar styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: purple;
+    padding: 10px 20px;
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
+    transform: perspective(1px) translateY(-5px);
+}
+
+
+.logo {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    flex: 1;
+    max-width: 600px;
+    text-align: center;
+}
+
+
+.search-input {
+    padding: 20px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+    font-size: 16px;
+    flex: 1;
+}
+
+.search-button {
+    background-color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.search-button i {
+    color: purple;
+}
+
+
+
+/* Card container styles */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card-wrapper {
+    width: 30%;
+    /*margin: 16px;*/
+}
+
+.card {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    border: 1px solid #ccc;
+    padding: 20px !important;
+    margin: 0 !important;
+}
+
+.card-image {
+    /*margin-right: 16px;*/
+    margin: unset;
+    padding: unset;
+    margin-right: 10px;
+}
+
+.card-image:hover {
+    cursor: pointer;
+}
+
+.card-content {
+    flex: 1;
+}
+
+.card-title {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.card-text {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.card-small-text {
+    font-size: 14px;
+}
+
+/* Footer styles */
+.footer {
+    background-color: purple;
+    padding: 40px;
+    text-align: center;
+    color: white;
+    font-size: 14px;
+    width: 100%;
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+    .card-wrapper {
+        width: 45%;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: 100%;
+    }
+    .card-wrapper {
+        width: 80%;
+    }
+    .card-title {
+        font-size: 20px;
+    }
+    .card-text {
+        font-size: 16px;
+    }
+    .card-small-text {
+        font-size: 12px;
+    }
+}
+
+
+/* Footer styles */
+.footer {
+    background-color: purple;
+    padding: 20px 0;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    position: fixed;
+    bottom: 0;
+    left: 10%;
+    border-radius: 20px;
+    box-shadow: 0px -5px 15px rgba(0,0,0,0.1);
+    transform: perspective(1px) translateY(5px);
+}
+
+.player {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.music-name {
+    flex: 1;
+    text-align: left;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.back-forward, .play-stop, .volume-icon {
+    color: #ff6700;
+    cursor: pointer;
+    margin: 0 20px;
+}
+
+.duration {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    margin-top: 10px;
+}
+
+.duration-line {
+    flex: 1;
+    margin: 0 10px;
+}
+
+.volume {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex: 1;
+}
+
+/* Volume bar styles */
+.volume-line {
+    width: 20%; /* This will be the length of the volume line */
+    margin-right: 10px; /* Space between volume line and volume icon */
+}
+
+
+.volume-icon {
+    font-size: 1.5rem;
+    cursor: default; /* Remove pointer cursor */
+}
+
+.volume-icon:hover + .volume-line,
+.volume-line:hover {
+    visibility: visible;
+}
+
+
+.spotify-player-wrapper {
+    position: fixed;
+    bottom: 1%;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*background: white; !* Or any color that matches your design *!*/
+    padding: 10px 0; /* Adjust as needed */
+    z-index: 1000; /* To make sure the player is always on top */
+}
+
+.spotify-player {
+    width: 80%; /* Adjust as needed */
+    height: 60px; /* Adjust as needed */
+    opacity: 90%;
+}
+
+.container {
+    position: relative;
+    min-height: 100vh;
+    padding-bottom: 460px; /* This should be the total height of your footer + spotify player + any desired margin */
+}
