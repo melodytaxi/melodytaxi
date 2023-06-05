@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useState, useEffect, useRef} from 'react';
 import MelodyTaxi from '../assets/MelodyTaxi.png';
 
 export function Home() {
@@ -13,6 +13,33 @@ export function Home() {
   }, []);
 
   const msToMin = (ms) => Math.floor(ms / (1000 * 60));
+
+  const ws = useRef(null); // create a reference to hold the WebSocket object
+
+  useEffect(() => {
+    ws.current = new WebSocket('ws://localhost:3001'); // assign the WebSocket to the reference
+
+    ws.current.onopen = () => {
+      // connection opened
+      console.log('connection opened');
+    };
+
+    ws.current.onerror = (e) => {
+      // an error occurred
+      console.log(e.message);
+    };
+
+    ws.current.onclose = (e) => {
+      // connection closed
+      console.log(e.code, e.reason);
+    };
+
+    return () => {
+      if (ws.current) {
+        ws.current.close();
+      }
+    };
+  }, []);
 
   const fetchSearchResults = async () => {
     if (searchQuery === '') return;
@@ -41,9 +68,23 @@ export function Home() {
     setLoading(false);
   };
 
-  const handleClickTrack = (id) => {
+  const handleClickTrack = (id, trackName, artist) => {
+    console.log("Track clicked with id: " + id); // log the clicked track id
     setActiveTrack(id);
+    let newId = id.toString();
+    let newTrackName = trackName.toString();
+    let msg = JSON.stringify({ type: 'track', id: newId, name: newTrackName, artist: artist}); // Prepare a JSON message
+    if (ws.current && ws.current.readyState === WebSocket.OPEN) {
+      console.log("Sending id to WebSocket server: " + msg); // log the id being sent to the WebSocket server
+      ws.current.send(msg);
+    } else {
+      console.log("WebSocket is not open"); // log if WebSocket is not open
+    }
   };
+
+
+
+
 
   return (
     <div className="container">
@@ -67,7 +108,7 @@ export function Home() {
           <div className="card-wrapper" key={index}>
             <div className="card">
               <div className="card-image">
-                <img src={result.image} alt={result.title} height={200} width={200} onClick={() => handleClickTrack(result.id)}/>
+                <img src={result.image} alt={result.title} height={200} width={200} onClick={() => handleClickTrack(result.id, result.title, result.artist)}/>
               </div>
               <div className="card-content">
                 <div className="card-title">{result.title}</div>
